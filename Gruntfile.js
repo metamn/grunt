@@ -1,24 +1,41 @@
+
+'use strict';
+
 module.exports = function(grunt) {
-  
-  
-  // Config
+
+  // Project configuration.
   grunt.initConfig({
-    mustache_render: {
-      all: {
-        files: [{
-          data: "components/pages/index.json",
-          template: "components/pages/index.mustache",
-          dest: "public/index.html"
-        }]
+    assemble: {
+      // Task-level options
+      options: {
+        assets: 'assets'
+      },
+      site: {
+        // Target-level options
+        files: [ { 
+          expand: true, 
+          cwd: 'components/pages/', 
+          src: ['**/*.hbs'], 
+          dest: 'public' }
+        ]
       }
+    },
+
+    // Before generating any new files,
+    // remove any previously-created files.
+    clean: {
+      all: ['public/**/*.{html}']
     }
   });
-  
-  
-  // Plugins
-  grunt.loadNpmTasks('grunt-mustache-render');
-  
 
-  // Tasks
-  grunt.registerTask('default', ['mustache_render']);
+  // Load npm plugins to provide necessary tasks.
+  grunt.loadNpmTasks('assemble');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-verb');
+  grunt.loadNpmTasks('grunt-newer' );
+
+  // Default task to be run.
+  grunt.registerTask('default', ['clean', 'newer:assemble']);
 };
+
+
