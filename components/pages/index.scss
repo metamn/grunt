@@ -1,0 +1,9 @@
+@import "compass/reset";
+@import "compass/css3";
+
+
+@import "pages/**/*";
+
+body {
+  @include test;
+}
