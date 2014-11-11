@@ -12,7 +12,7 @@ module.exports = function(grunt) {
       // Task-level options
       options: {
         assets: 'assets',
-        partials: ['components/**/*.hbs']
+        partials: ['components/**/*.hbs'],
       },
       // Target-level options
       site: {
